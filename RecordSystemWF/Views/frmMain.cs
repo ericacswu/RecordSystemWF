@@ -3,6 +3,7 @@ using MySqlConnector;
 using RecordSystemWF.Models.Context;
 using RecordSystemWF.Views;
 using System.Configuration;
+using System.Diagnostics;
 using System.Windows.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -18,6 +19,7 @@ namespace RecordSystemWF
         {
             InitializeComponent();
             togglePanels();
+            this.IsMdiContainer = true;
         }
 
         #region TogglePanels
@@ -48,36 +50,24 @@ namespace RecordSystemWF
         }
         #endregion
 
-        public void setChildForm(Form form)
+        public void setUserControl(UserControl control)
         {
-            if(form != this)
-            {
-                pChildForm.Visible = false;
-            }
-
-            if (ActiveMdiChild != null)
-            {
-                ActiveMdiChild.Close();
-            }
-            // Set the Parent Form of the Child window.
-            form.MdiParent = this;
-            form.Dock = DockStyle.Fill;
-
-            spcMain.Panel2.Controls.Add(form);
-
-            form.Show();
+            spcMain.Panel2.Controls.Add(control);
+            control.Show();
+            control.BringToFront();
         }
 
         #region Button Functions
         private void btnDashBoard_Click(object sender, EventArgs e)
         {
-            if (this.ActiveMdiChild != null)
+            foreach (Control c in spcMain.Panel2.Controls)
             {
-                this.ActiveMdiChild.Close();
+                if (c.GetType().BaseType == typeof(UserControl))// && c != controlToLeaveOpen)
+                {
+                    spcMain.Panel2.Controls.Remove(c);
+                    c.Dispose();
+                }
             }
-            pChildForm.Dock = DockStyle.Fill;
-            pChildForm.Visible = true;
-            pChildForm.Show();
         }
 
         private void btnAddNewRecord_Click(object sender, EventArgs e)
@@ -92,13 +82,14 @@ namespace RecordSystemWF
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            frmHistory form = new frmHistory();
-            setChildForm(form);
+            uHistory uHistory = new uHistory();
+            setUserControl(uHistory);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-
+            uImport uImport = new uImport();
+            setUserControl(uImport);
         }
 
         private void btnString_Click(object sender, EventArgs e)

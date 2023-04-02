@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
+﻿using MySqlConnector;
 using RecordSystemWF.Helper;
 using RecordSystemWF.Models.Context;
 using System;
@@ -16,12 +15,12 @@ using System.Windows.Forms;
 
 namespace RecordSystemWF.Views
 {
-    public partial class frmHistory : Form
+    public partial class uHistory : UserControl
     {
         CommFunction cf = new CommFunction();
         StringingRecordContext context = new StringingRecordContext();
 
-        public frmHistory()
+        public uHistory()
         {
             InitializeComponent();
             init();
@@ -54,9 +53,9 @@ namespace RecordSystemWF.Views
             }
         }
 
-        private void frmHistory_Load(object sender, EventArgs e)
+        private void uHistory_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine("frmHistory loaded");
+            Debug.WriteLine("uHistory loaded");
             cf.setDataGridView(dgvRecord);
         }
     }
