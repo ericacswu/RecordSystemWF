@@ -52,6 +52,7 @@ namespace RecordSystemWF
 
         public void setUserControl(UserControl control)
         {
+            control.Dock = DockStyle.Fill;
             spcMain.Panel2.Controls.Add(control);
             control.Show();
             control.BringToFront();

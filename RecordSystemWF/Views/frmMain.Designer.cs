@@ -363,6 +363,7 @@
             // spcMain
             // 
             spcMain.Dock = DockStyle.Fill;
+            spcMain.FixedPanel = FixedPanel.Panel1;
             spcMain.Location = new Point(0, 0);
             spcMain.MinimumSize = new Size(1264, 681);
             spcMain.Name = "spcMain";
@@ -373,6 +374,7 @@
             // 
             // spcMain.Panel2
             // 
+            spcMain.Panel2.BackColor = Color.FromArgb(20, 20, 20);
             spcMain.Panel2.Controls.Add(pChildForm);
             spcMain.Size = new Size(1264, 681);
             spcMain.SplitterDistance = 239;
@@ -655,8 +657,7 @@
             // 
             // frmMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(20, 20, 20);
             ClientSize = new Size(1264, 681);
             Controls.Add(spcMain);
